@@ -7,9 +7,12 @@ const WINDOW_WIDTH = 1280
 const WINDOW_HEIGHT = 720
 let Box = new TestObject(render2D);
 
+let timer = 0;
+
 function gameUpdate(){
     canvas.width = WINDOW_WIDTH;
     canvas.height = WINDOW_HEIGHT;
+    timer++;
 
     Box.update();
 }
@@ -20,6 +23,8 @@ function gameDraw() {
     render2D.fillRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
 
     Box.draw();
+    render2D.font = "48px serif";
+    render2D.fillText("時間:" + Math.round((timer / 60)), 0, 50);
 }
 
 function gameLoop() {
