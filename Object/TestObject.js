@@ -1,6 +1,8 @@
-import { Location2D } from "./Location2D.js";
-import { Vector2D } from "./Vector2D.js";
-import { GameUtil } from "../GameUtil.js";
+import { Location2D } from "../Library/Location2D.js";
+import { Vector2D } from "../Library/Vector2D.js";
+import { GameUtil } from "../Util/GameUtil.js";
+import { Bullet } from "../Object/Bullet.js";
+import { ObjectManager } from "../main.js";
 export class TestObject {
     render2D_;
     location_;
@@ -23,6 +25,11 @@ export class TestObject {
         }
         if (GameUtil.keys["s"]) {
             this.location_.y_ += this.vector_.y_;
+        }
+        //弾を発射
+        if (GameUtil.keys["p"]) {
+            let bullet = new Bullet(this.render2D_, this.location_);
+            ObjectManager.bulletList.push(bullet);
         }
     }
     draw() {

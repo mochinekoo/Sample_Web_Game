@@ -1,5 +1,6 @@
-import {GameUtil} from "./Util/GameUtil"
-import {TestObject} from "./Object/TestObject"
+import {GameUtil} from "./Util/GameUtil.js"
+import {TestObject} from "./Object/TestObject.js"
+import {Bullet} from "./Object/Bullet.js";
 
 const canvas = document.getElementById("game") as HTMLCanvasElement;
 const render2D:CanvasRenderingContext2D = canvas.getContext("2d")!;
@@ -9,12 +10,21 @@ let Box = new TestObject(render2D);
 
 let timer = 0;
 
+export class ObjectManager {
+    static bulletList:Bullet[] = [];
+}
+
 function gameUpdate(){
     canvas.width = WINDOW_WIDTH;
     canvas.height = WINDOW_HEIGHT;
     timer++;
 
     Box.update();
+    for (let i = 0; i < ObjectManager.bulletList.length; i++) {
+        let bullet = ObjectManager.bulletList[i]!;
+        if (bullet == null) return;
+        bullet.update();
+    }
 }
 
 function gameDraw() {
@@ -25,6 +35,12 @@ function gameDraw() {
     Box.draw();
     render2D.font = "48px serif";
     render2D.fillText("時間:" + Math.round((timer / 60)), 0, 50);
+
+    for (let i = 0; i < ObjectManager.bulletList.length; i++) {
+        let bullet = ObjectManager.bulletList[i]!;
+        if (bullet == null) return;
+        bullet.draw();
+    }
 }
 
 function gameLoop() {
