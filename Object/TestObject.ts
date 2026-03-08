@@ -1,6 +1,6 @@
-import {Location2D} from "./Location2D.js"
-import {Vector2D} from "./Vector2D.js";
-import {GameUtil} from "./GameUtil.js";
+import {Location2D} from "../Library/Location2D"
+import {Vector2D} from "../Library/Vector2D";
+import {GameUtil} from "../Util/GameUtil";
 
 export class TestObject {
     render2D_:CanvasRenderingContext2D;

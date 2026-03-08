@@ -1,6 +1,6 @@
 import { Location2D } from "./Location2D.js";
 import { Vector2D } from "./Vector2D.js";
-import { GameUtil } from "./GameUtil.js";
+import { GameUtil } from "../GameUtil.js";
 export class TestObject {
     render2D_;
     location_;

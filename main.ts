@@ -1,5 +1,5 @@
-import {GameUtil} from "./GameUtil.js"
-import {TestObject} from "./TestObject.js"
+import {GameUtil} from "./Util/GameUtil"
+import {TestObject} from "./Object/TestObject"
 
 const canvas = document.getElementById("game") as HTMLCanvasElement;
 const render2D:CanvasRenderingContext2D = canvas.getContext("2d")!;
