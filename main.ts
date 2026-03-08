@@ -1,48 +1,25 @@
+import {GameUtil} from "./GameUtil.js"
+import {TestObject} from "./TestObject.js"
+
 const canvas = document.getElementById("game") as HTMLCanvasElement;
-const ctx = canvas.getContext("2d");
-
-let x:number = 50;
-let y:number = 50;
-let keys: Record<string, boolean> = {};
-
+const render2D:CanvasRenderingContext2D = canvas.getContext("2d")!;
 const WINDOW_WIDTH = 1280
 const WINDOW_HEIGHT = 720
-
-window.addEventListener("keydown", (e) => {
-    keys[e.key] = true;
-    console.log("down", e.key);
-});
-
-window.addEventListener("keyup", (e) => {
-    keys[e.key] = false;
-    console.log("up", e.key);
-});
+let Box = new TestObject(render2D);
 
 function gameUpdate(){
     canvas.width = WINDOW_WIDTH;
     canvas.height = WINDOW_HEIGHT;
-    //x += 2;
-    if (keys["a"]) {
-        x -= 3;
-    }
-    if (keys["d"]) {
-        x += 3;
-    }
-    if (keys["w"]) {
-        y -= 3;
-    }
-    if (keys["s"]) {
-        y += 3;
-    }
+
+    Box.update();
 }
 
 function gameDraw() {
-    ctx.clearRect(0,0, canvas.width ,canvas.height);
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
+    render2D.clearRect(0,0, canvas.width ,canvas.height);
+    render2D.fillStyle = "white";
+    render2D.fillRect(0,0,WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    ctx.fillStyle = "red";
-    ctx.fillRect(x,y,50,50);
+    Box.draw();
 }
 
 function gameLoop() {
@@ -55,8 +32,15 @@ function gameInit() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    canvas.tabIndex = 0;
-    canvas.focus();
+    window.addEventListener("keydown", (e) => {
+        GameUtil.keys[e.key] = true;
+        console.log("down", e.key);
+    });
+
+    window.addEventListener("keyup", (e) => {
+        GameUtil.keys[e.key] = false;
+        console.log("up", e.key);
+    });
 }
 
 gameInit();
